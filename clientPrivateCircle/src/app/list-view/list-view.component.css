@@ -7,11 +7,15 @@
     padding: 0px;
 }
 
+.body {
+    font-family: 'Lato', sans-serif;
+}
 ::ng-deep :root {
     --nav-bar-height: 60px;
     --list-view-theme-bg-color: #f2f2f2;
-    --text-theme-color: #05327a;
+    --text-theme-color: #002b42;
   }
+
 .header{
     align-items: center;
     background-color: var(--list-view-theme-bg-color);  
@@ -35,10 +39,10 @@
     align-items: center;
     color: black;
     display: flex;
-    padding: 5px;
+    padding: 10px;
 }
 
-.navHighlighter {
+.nav-highlighter {
     background-color: var(--text-theme-color);
     border: none;
     color: white;
@@ -49,8 +53,8 @@
     margin-right:10px;
 }
 
-.mat-icon-action-style {
-    color: #cccaca;
+.mat-action-icon-style {
+    color: #c9c9c9;
     margin-right:10px;
 }
 
@@ -59,10 +63,7 @@
     visibility: hidden;
 }
 
-.mat-icon-color {
-    color:black;
-}
-.search-bar {
+.search-text {
     align-items: flex-end;
     background: white;
     border: solid 1px #cfcaca;
@@ -72,28 +73,29 @@
     width: 25%;
 }
 
-.search-text {
-    background: white;
-    border: none;
-    height: 100%;
+.search-text:focus {
+    border: solid 1px #58b6eb;
 }
 
 .search-text:focus {
     outline: 0;
 }
 
+                                            /* End of header section */
+
 .body {
     display: flex;
 }
+
 .list-view-container {
     height: 500px;
-    overflow-y: scroll;
+    overflow-y: auto;
     width: 70%;
 }
 
 .list-item-description {
     height: 500px;
-    overflow-y: scroll;
+    overflow-y: auto;
     width: 30%;
 }
 
@@ -108,67 +110,88 @@
 .description-text {
     display: inline-block;
     margin: 15px 0px 15px 20px;
+    color: black;
 }
 
 .description-add {
     color: var(--text-theme-color);
     display: inline-block;
     font-weight: 900;
-    margin: 15px 0px 15px 10px;
+    margin: 15px 0px 15px 20px;
 }
 
 .description-list {
     height: 100% - 80px;
     margin: 20px;
 }
+
 li {
     color: var(--text-theme-color);
     list-style: none;
     margin: 10px;
+    margin-bottom: 20px 
 }
 
-.listHighlight {
+.list-highlight {
     background-color: var(--list-view-theme-bg-color);
 }
 
-.dateColumn {
-    flex: 1;
-    color: #cccaca;
+.column-header {
+    color:#8c8b8b;
+    font-weight: 600;
 }
-.dateColumnHighlight {
+
+.table-row {
+    border-bottom: solid 1px #cfcaca;
+}
+.date-column-cell {
     flex: 1;
+    color: #c9c9c9;
+    font-weight: 500;
+}
+
+.date-column {
+    flex: 1;
+}
+
+.date-column-highlight {
     color: black; 
+    flex: 1;
 }
-.listColumn {
+
+.list-column {
     flex: 5;
 }
 
-.listColumnEntities {
+.list-column-entities {
     color:black;
     flex: 5;
     font-weight: bold;
     font-size: 15px;
 }
 
-.listColumnZeroEntities {
-    color: #6c79f5;
+.list-column-zero-entities {
+    color: #58b6eb;
     flex: 5;
     font-weight: bold;
     font-size: 15px;
 }
-.entitiesColumn {
-    flex: 2;
+.entities-column {
     display: flex;
+    flex: 2;
     justify-content: flex-end;
     margin-right: 50px;
 }
 
-.actionsColumn {
+.actions-column {
     flex: 2;
 }
 
+.mat-icon-color-on-selected {
+    color:black;
+}
 
-.detailColumn {
+.detail-column {
     /* display: inline-block; */
     border-bottom: solid 4px white;
     cursor: pointer;
@@ -177,9 +200,10 @@ li {
     text-align: center;
     color: var(--text-theme-color);
 }
-.detailHighlighter {
+.detail-highlighter {
     background-color: white;
-    border-bottom: solid 4px blue;
+    border-bottom: solid 4px  var(--text-theme-color);
+    font-weight: bold;
 }
 
 .list-view-savedFilter ,.list-view-savedHistory{
@@ -187,6 +211,22 @@ li {
     height: 100%;
     text-align: center;
     width: 100%;
+}
+
+.list-view-container::-webkit-scrollbar, .list-item-description::-webkit-scrollbar {
+    width: 10px;
+}
+ 
+.list-view-container::-webkit-scrollbar-track, .list-item-description::-webkit-scrollbar-track{
+    background: var(--list-view-theme-bg-color); 
+    border-radius: 10px;
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+ 
+.list-view-container::-webkit-scrollbar-thumb, .list-item-description::-webkit-scrollbar-thumb {
+    background: #acacac; 
+    border-radius: 10px;
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
 }
 
 

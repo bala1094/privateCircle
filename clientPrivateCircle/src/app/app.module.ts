@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule, MatTableModule } from '@angular/material';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AppRoutingModule } from './app-routing.module';
 // components
@@ -21,6 +22,7 @@ import {AppStateManagerService} from './services/app-state-manager.service';
     AppRoutingModule,
     BrowserModule,
     FormsModule,
+    FontAwesomeModule,
     MatIconModule,
     MatTableModule
   ],

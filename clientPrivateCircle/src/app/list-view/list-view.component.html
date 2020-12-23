@@ -1,21 +1,20 @@
 <div class='header'>
   <div class='nav'>
-    <div class="saved-list" [ngClass]="{navHighlighter : selectedTab === 'savedList'}" (click)="setSelectedTab('savedList')">
-      <mat-icon class='mat-icon-style material-icons-outlined'>list</mat-icon>
+    <div class="saved-list" [ngClass]="{'nav-highlighter' : selectedTab === 'savedList'}" (click)="setSelectedTab('savedList')">
+      <!-- <mat-icon class='mat-icon-style material-icons-outlined'>list</mat-icon> -->
+      <fa-icon class="mat-icon-style" [icon]="icons.faListUl"></fa-icon>
       <span>SAVED LISTS</span>
     </div>
-    <div class="saved-filter" [ngClass]="{navHighlighter : selectedTab === 'savedFilter'}" (click)="setSelectedTab('savedFilter')">
+    <div class="saved-filter" [ngClass]="{'nav-highlighter' : selectedTab === 'savedFilter'}" (click)="setSelectedTab('savedFilter')">
       <mat-icon class='mat-icon-style material-icons-outlined'>filter_alt</mat-icon>
       <span>SAVED FILTERS</span>
     </div>
-    <div class="search-history" [ngClass]="{navHighlighter : selectedTab === 'savedHistory'}" (click)="setSelectedTab('savedHistory')">
+    <div class="search-history" [ngClass]="{'nav-highlighter' : selectedTab === 'savedHistory'}" (click)="setSelectedTab('savedHistory')">
       <mat-icon class='mat-icon-style material-icons-outlined'>history</mat-icon>
       <span>SAVED HISTORY</span>
     </div>
   </div>
-  <div class="search-bar">
-      <input (keyup)="searchByListName($event.target.value)" type="text" class="search-text" placeholder="Search">
-  </div>
+  <input (keyup)="searchByListName($event.target.value)" type="text" class="search-text" placeholder="Search">
 </div>
 <div class='body'>
   <ng-container [ngSwitch]="selectedTab">
@@ -24,73 +23,76 @@
         <mat-table #table [dataSource]="dataSource">
     
           <ng-container matColumnDef="date">
-            <mat-header-cell *matHeaderCellDef class='dateColumn'> Date </mat-header-cell>
+            <mat-header-cell *matHeaderCellDef class='date-column column-header'> Date </mat-header-cell>
             <mat-cell *matCellDef="let element" 
-              [ngClass]="{'dateColumn': element.listName !== listSelectedRow, 'dateColumnHighlight': element.listName == listSelectedRow}"> 
+              [ngClass]="{'date-column-cell': element.listName !== listSelectedRow, 'date-column-highlight': element.listName == listSelectedRow}"> 
               {{element.date | date: 'MMM dd'}} </mat-cell>
           </ng-container>
       
            <ng-container matColumnDef="listName">
-            <mat-header-cell *matHeaderCellDef class='listColumn'> List Name </mat-header-cell>
+            <mat-header-cell *matHeaderCellDef class='list-column column-header'> List Name </mat-header-cell>
             <mat-cell 
               *matCellDef="let element" 
-              [ngClass]="{listColumnEntities : element.description.length > 0 , listColumnZeroEntities : element.description.length == 0}"> 
+              [ngClass]="{'list-column-entities' : element.description.length > 0 , 'list-column-zero-entities' : element.description.length == 0}"> 
               {{element.listName}} </mat-cell>
           </ng-container>
       
           <ng-container matColumnDef="numOfEntities">
-            <mat-header-cell *matHeaderCellDef class='entitiesColumn'> No. of Entities </mat-header-cell>
-            <mat-cell *matCellDef="let element" class='entitiesColumn' > {{element.description.length}} </mat-cell>
+            <mat-header-cell *matHeaderCellDef class='entities-column column-header'> No. of Entities </mat-header-cell>
+            <mat-cell *matCellDef="let element" class='entities-column' > {{element.description.length}} </mat-cell>
           </ng-container>
       
            <ng-container matColumnDef="actions">
-            <mat-header-cell *matHeaderCellDef class='actionsColumn'> Actions </mat-header-cell>
-            <mat-cell *matCellDef="let element" class='actionsColumn'>
+            <mat-header-cell *matHeaderCellDef class='actions-column column-header'> Actions </mat-header-cell>
+            <mat-cell *matCellDef="let element" class='actions-column'>
               <span>
                 <mat-icon 
                   class='material-icons-outlined' 
                   [ngClass]="{'mat-icon-disable':!element.actions[0],
-                              'mat-icon-action-style':element.actions[0],
-                              'mat-icon-color':element.listName == listSelectedRow}">
+                              'mat-action-icon-style':element.actions[0],
+                              'mat-icon-color-on-selected':element.listName == listSelectedRow}">
                   forward_to_inbox</mat-icon>
               </span> 
               <span>
                 <mat-icon 
                   class='material-icons-outlined'
                   [ngClass]="{'mat-icon-disable':!element.actions[1],
-                              'mat-icon-action-style':element.actions[1],
-                              'mat-icon-color':element.listName == listSelectedRow}">
+                              'mat-action-icon-style':element.actions[1],
+                              'mat-icon-color-on-selected':element.listName == listSelectedRow}">
                   create</mat-icon>
               </span> 
               <span>
                 <mat-icon
                    class='material-icons-outlined'
-                   [ngClass]="{'mat-icon-disable':!element.actions[1],
-                   'mat-icon-action-style':element.actions[1],
-                   'mat-icon-color':element.listName == listSelectedRow}">
+                   [ngClass]="{'mat-icon-disable':!element.actions[2],
+                              'mat-action-icon-style':element.actions[2],
+                              'mat-icon-color-on-selected':element.listName == listSelectedRow}">
                   share</mat-icon>
               </span> 
               <span>
                 <mat-icon 
                   class='material-icons-outlined' 
-                  [ngClass]="{'mat-icon-disable':!element.actions[1],
-                              'mat-icon-action-style':element.actions[1],
-                              'mat-icon-color':element.listName == listSelectedRow}">
+                  [ngClass]="{'mat-icon-disable':!element.actions[3],
+                              'mat-action-icon-style':element.actions[3],
+                              'mat-icon-color-on-selected':element.listName == listSelectedRow}">
                   delete</mat-icon>
               </span> 
             </mat-cell>
           </ng-container>
     
           <ng-container matColumnDef="details">
-            <mat-header-cell *matHeaderCellDef class='detailColumn'> </mat-header-cell>
+            <mat-header-cell *matHeaderCellDef class='detail-column'> </mat-header-cell>
             <mat-cell *matCellDef="let element" 
-              class="detailColumn"
+              class="detail-column"
               (click)='showDetails(element)' 
-              [ngClass]="{'detailHighlighter': listSelectedRow === element.listName}"> Details </mat-cell>
+              [ngClass]="{'detail-highlighter': listSelectedRow === element.listName}"> Details </mat-cell>
           </ng-container>
     
-          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'listHighlight': listSelectedRow === row.listName}"></mat-row>
+          <mat-header-row class="table-row" *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"
+           [ngClass]="{'list-highlight': listSelectedRow === row.listName}"
+           class="table-row">
+          </mat-row>
         </mat-table>
       </div>
       <div class='list-item-description'>

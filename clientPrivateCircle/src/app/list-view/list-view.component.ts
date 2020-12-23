@@ -5,6 +5,8 @@ import {AppStateManagerService} from './../services/app-state-manager.service';
 import {ListDataFormat} from './../models/list-data-format';
 import {MatTableDataSource} from '@angular/material';
 
+import { faListUl, faHistory, faFilter } from '@fortawesome/free-solid-svg-icons';
+
 @Component({
   selector: 'app-list-view',
   templateUrl: './list-view.component.html',
@@ -19,6 +21,12 @@ export class ListViewComponent implements OnInit {
   listSelectedRow: string;
   selectedTab: string;
 
+   icons = {
+    'faListUl': faListUl,
+    'faHistory': faHistory,
+    'faFilter': faFilter
+  };
+
   constructor(
     private appStateManagerService: AppStateManagerService
   ) { }
@@ -28,26 +36,24 @@ export class ListViewComponent implements OnInit {
       data => {
       this.listViewData = data;
       this.dataSource = new MatTableDataSource(this.listViewData);
-      // setting the custom filter for list name row
+      // setting the custom filter for list name object
       this.dataSource.filterPredicate = (row: any, filterValue: string) =>
         row.listName.toLowerCase().includes(filterValue.trim().toLowerCase());
-    }
+      }
     );
   }
 
+  // sets the tab selected to show the table data or history
+  setSelectedTab(value) {
+    this.selectedTab = value;
+  }
+  // sets the selected row in the table on clicking detail
   showDetails(element) {
     this.descriptions = element.description;
     this.listSelectedRow = element.listName;
-    console.log( this.descriptions);
   }
-
+  // search filter(angular material)
   searchByListName(searchValue) {
-    console.log(searchValue);
     this.dataSource.filter = searchValue;
-  }
-
-  setSelectedTab(value) {
-    this.selectedTab = value;
-    console.log(this.selectedTab);
   }
 }
